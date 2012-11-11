@@ -39,6 +39,34 @@
     <script src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>
 	<script src="ckeditor/ckeditor.js"></script>
 
+	<script>
+		//Add unselected fields to control
+		var FieldSelector = function( parent ){ 
+			
+			this.parent = parent
+			
+			this.update = function(){
+				$(".default.fields").html("")
+				//each
+				$("#sortable li.unselected").each(function(){
+					var label_title = $(this).find("label").html().replace(/:/g,"")
+					var label_name = $(this).find("label").prop("for")
+					var unselected_item = $("<div class='item' name='" + label_name + "'><img src='images/50-plus.png'>" + label_title + "</div>")
+					unselected_item.on("click", function(){  
+													var name = $(this).attr('name')
+													$("#sortable li label[for=" + name + "]").parent().removeClass("unselected")
+													$(this).remove() 
+												 
+												 })
+					$(".default.fields").prepend( unselected_item )	
+				})
+				//eachend
+			}
+		}
+		
+		var field_selector = new FieldSelector( this )
+	
+	</script>
 </head>
 <body>
 
@@ -52,45 +80,77 @@
 	<!-- Delete everything in this .container and get started on your own site! -->
 
 	<div class="container">
-		<div class="sixteen columns main image"  ondrop="drop(event)"
-ondragover="allowDrop(event)">
-			<div class="logo image" draggable="true"  ondrop="alert('drop')">
-            	<button class="admin change">Vaihda kuva</button>
+		<div class="sixteen columns header">
+        	<div class="logo image">
+             	<img src="images/placeholder_logo_image.png" />
+              	<button class="admin change">Vaihda kuva</button>
+        	</div>
+           
+            <div class="main image">
+            	<img src="images/placeholder_main_image.jpg" />
+                <button class="admin change">Vaihda kuva</button>
             </div>
-            &nbsp;
-            <button class="admin change">Vaihda kuva</button>
-		</div>
-        <div class="sixteen columns main content" contenteditable="true">
-			orem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum claritatem. Investigationes demonstraverunt lectores legere me lius quod ii legunt saepius. Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum. Mirum est notare quam littera gothica, quam nunc putamus parum claram, anteposuerit litterarum formas humanitatis per seacula quarta decima et quinta decima. Eodem modo typi, qui nunc nobis videntur parum clari, fiant sollemnes in futurum.
+        </div>
+        
+        <div class="sixteen columns main content" >
+        	<div class="padding" contenteditable="true">
+            <h1>Lorem ipsum doloret mundi</h1>
+            
+			<p>
+            	Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. 
+            </p>
+            <p>
+            	Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum claritatem. Investigationes demonstraverunt lectores legere me lius quod ii legunt saepius. Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum. Mirum est notare quam littera gothica, quam nunc putamus parum claram, anteposuerit litterarum formas humanitatis per seacula quarta decima et quinta decima. Eodem modo typi, qui nunc nobis videntur parum clari, fiant sollemnes in futurum.</p>
+            </div>
 		</div>
         
 		
         <div class="sixteen columns fields container">
-        	Lisää kenttiä:<br>
-        	<div class="default fields"><div class="clearfix"></div></div>  
+        	<div class="padding">
+        		Lisää kenttiä:<br>
+        		<div class="default fields"><div class="clearfix"></div></div>  
+            </div>
         </div>   
 		<div class="sixteen columns main content">
-			<ul id="sortable">
-            	<li class="selected"><label for="name">Nimi:</label><input type="text" id="name" name="name"></li>
-                <li class="selected"><label for="email">Email:</label><input type="text" name="email"></li>
-                <li class="selected"><label for="phone">Puhelinnumero:</label><input type="text" name="phone"></li>
-            	<li class="unselected"><label for="address">Lähiosoite:</label><input type="text" name="address"></li>
-            	<li class="unselected"><label for="zip">Postinumero:</label><input type="text" name="zip"></li>
-            	<li class="unselected"><label for="city">Postitoimipaikka:</label><input type="text" name="city"></li>
-            	<li class="unselected"><input type="checkbox" name="marketing" /> <label for="marketing">Minulle saa lähettää suoramarkkinointiviestejä</label></li>
+        	<div class="padding">
+                <ul id="sortable">
+                    <li class="selected"><label for="name">Nimi:</label>				<input type="text" id="name" name="name"></li>
+                    <li class="unselected"><label for="name">Etunimi:</label>			<input type="text" id="name" name="name"></li>
+                    <li class="unselected"><label for="name">Sukunimi:</label>			<input type="text" 	name="name"></li>
+                    <li class="selected"><label for="email">Email:</label>				<input type="text" name="email"></li>
+                    <li class="selected"><label for="phone">Puhelinnumero:</label>		<input type="text" name="phone"></li>
+                    <li class="unselected"><label for="address">Lähiosoite:</label>		<input type="text" name="address"></li>
+                    <li class="unselected"><label for="zip">Postinumero:</label>		<input type="text" name="zip"></li>
+                    <li class="unselected"><label for="city">Postitoimipaikka:</label>	<input type="text" name="city"></li>
+                    <li class="unselected"><label for="city">Maa:</label>				<input type="text" name="country"></li>
+                    <li class="unselected"><label for="answer">Vastaus:</label>			<input type="text" name="answer"></li>
+                    <li class="unselected"><label for="comment">Kommentti:</label>		<input type="text" name="comment"></li>
+                    <li class="unselected"><label for="age">Ikä:</label>				<input type="text" name="age"></li>
+                    <li class="unselected"><label for="birthdate">Syntymäaika:</label>	<input type="text" name="birthdate"></li>
+                    <li class="unselected">
+                        <label for="sex">Sukupuoli:</label>
+                        <input type="radio" name="sex" value="mies"> Mies 
+                        <input type="radio" name="sex" value="mies"> Nainen 
+                    </li>
+                    <li class="unselected"><input type="checkbox" name="newsletter" /> <label for="newsletter">Tilaan uutiskirjeen</label></li>
+                    <li class="unselected"><input type="checkbox" name="marketing" /> <label for="marketing">Minulle saa lähettää suoramarkkinointiviestejä</label></li>
+                    
+                    
+                </ul>
                 
-                
-            </ul>
-            
-            
-            
-            <button>Lähetä</button>
+                <button>Lähetä</button>
             	
-		
+			</div>
             
 			<script>
+				$( ".logo.image" ).draggable({axis:"y"});
+				$( ".main.image img" ).draggable({ axis:"y" });
+				
 				$("#sortable li").prepend('<img class="handle" src="images/14-bothways.png" /><img class="hide" src="images/298-circlex.png">')
-				$("#sortable li .hide").on("click",function(){ $(this).parent().addClass("unselected").removeClass("selected") })
+				$("#sortable li .hide").on("click",function(){ 
+															$(this).parent().addClass("unselected").removeClass("selected") 
+															field_selector.update()
+															})
 				
 				$(function() {
 					$( "#sortable" ).sortable({
@@ -103,26 +163,9 @@ ondragover="allowDrop(event)">
 					});
 				});
 				
-				//Add unselected fields to control
-				$("#sortable li.unselected").each(function(){
-					var label_title = $(this).find("label").html()
-					var label_name = $(this).find("label").prop("for")
-					
-					
-					var unselected_item = $("<div class='item' name='" + label_name + "'>" + label_title + "</div>")
-					 unselected_item.on("click", function(){  
-													var name = $(this).attr('name')
-													$("#sortable li label:[for=" + name + "]").addClass("HEP")
-												 	$(this).remove() 
-												 
-												 })
-					$(".default.fields").prepend( unselected_item )	
-					
-					
-				})
 				
+				field_selector.update()
 				
-			
 			</script>       
 		</div>
         
